@@ -77,13 +77,12 @@ const BeforeAfterSlider = () => {
           {/* Before Image (Foreground overlay) */}
           <div 
             className="absolute inset-0 overflow-hidden pointer-events-none"
-            style={{ width: `${sliderPosition}%` }}
+            style={{ clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)` }}
           >
             <img 
               src={beforeImg} 
               alt="Before Transformation" 
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none max-w-none"
-              style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100%' }}
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             />
             <div className="absolute bottom-4 left-4 bg-charcoal/80 border border-gold/30 px-3 py-1 text-xs text-cream uppercase tracking-widest rounded backdrop-blur whitespace-nowrap">
               Before Treatment
