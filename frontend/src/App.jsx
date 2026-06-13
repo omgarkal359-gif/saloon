@@ -123,30 +123,58 @@ const FALLBACK_SERVICES = [
   }
 ];
 
+const DEFAULT_SETTINGS = {
+  phoneNumber: '+91 9326899376',
+  location: 'Shop No. 2, Plot No. 13, Mahavir Sparsh, Sector-3, Ulwe, Navi Mumbai - 410206',
+  instagramUrl: 'https://instagram.com/foreverbeautysalon'
+};
+
 function App() {
   const [services, setServices] = useState(FALLBACK_SERVICES);
+  const [transformations, setTransformations] = useState([]);
+  const [salonSettings, setSalonSettings] = useState(DEFAULT_SETTINGS);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState('home'); // 'home' or 'admin'
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
-  // Fetch services from Backend
-  const fetchServices = async () => {
+  const fetchAllData = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/services`);
-      const data = await response.json();
-      if (data.success && data.services && data.services.length > 0) {
-        setServices(data.services);
+      const [resServices, resTransformations, resSettings] = await Promise.allSettled([
+        fetch(`${API_BASE_URL}/services`),
+        fetch(`${API_BASE_URL}/transformations`),
+        fetch(`${API_BASE_URL}/settings`)
+      ]);
+
+      if (resServices.status === 'fulfilled') {
+        const data = await resServices.value.json();
+        if (data.success && data.services && data.services.length > 0) {
+          setServices(data.services);
+        }
+      }
+
+      if (resTransformations.status === 'fulfilled') {
+        const data = await resTransformations.value.json();
+        if (data.success && data.transformations) {
+          setTransformations(data.transformations);
+        }
+      }
+
+      if (resSettings.status === 'fulfilled') {
+        const data = await resSettings.value.json();
+        if (data.success && data.settings) {
+          setSalonSettings(data.settings);
+        }
       }
     } catch (error) {
-      console.warn('Backend API service catalog fetch failed. Falling back to static data.', error);
+      console.warn('Backend API fetch failed. Falling back to static data.', error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchServices();
+    fetchAllData();
 
     // Support typing ?admin in the browser URL to immediately access gateway
     const params = new URLSearchParams(window.location.search);
@@ -155,10 +183,10 @@ function App() {
     }
   }, []);
 
-  // Sync services when entering home view (to refresh dynamic changes)
+  // Sync data when returning to home view (to refresh dynamic changes)
   useEffect(() => {
     if (view === 'home') {
-      fetchServices();
+      fetchAllData();
     }
   }, [view]);
 
@@ -188,9 +216,16 @@ function App() {
     };
   }, [loading, services, view]);
 
-  const handleBookWhatsApp = () => {
+  // Build WhatsApp booking URL from dynamic phone number
+  const getWhatsAppUrl = () => {
+    const rawPhone = salonSettings?.phoneNumber || '+91 9326899376';
+    const phone = rawPhone.replace(/\D/g, ''); // strip non-digits
     const text = encodeURIComponent("Hello Forever Beauty Salon! I would like to inquire about booking a treatment.");
-    window.open(`https://wa.me/919326899376?text=${text}`, '_blank');
+    return `https://wa.me/${phone}?text=${text}`;
+  };
+
+  const handleBookWhatsApp = () => {
+    window.open(getWhatsAppUrl(), '_blank');
   };
 
   const handleContactUs = () => {
@@ -207,21 +242,21 @@ function App() {
   return (
     <div className="relative min-h-screen bg-charcoal text-cream font-sans antialiased animate-fade-in">
       {/* Navigation Header */}
-      <Navbar onContactUs={handleContactUs} />
+      <Navbar onContactUs={handleContactUs} salonSettings={salonSettings} />
 
       {/* Main Luxury Content Sections */}
       <main>
-        <Hero onBookWhatsApp={handleBookWhatsApp} />
-        
+        <Hero onBookWhatsApp={handleBookWhatsApp} salonSettings={salonSettings} />
+
         <ServiceMenu services={services} />
-        
-        <BeforeAfterSlider />
-        
-        <Salon />
+
+        <BeforeAfterSlider transformations={transformations} />
+
+        <Salon salonSettings={salonSettings} />
       </main>
 
       {/* Footer Details */}
-      <Footer onAdminClick={() => setView('admin')} />
+      <Footer onAdminClick={() => setView('admin')} salonSettings={salonSettings} />
     </div>
   );
 }

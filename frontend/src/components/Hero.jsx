@@ -2,7 +2,9 @@ import React from 'react';
 import MagneticButton from './MagneticButton';
 import heroBg from '../assets/salon_hero_bg.png';
 
-const Hero = ({ onBookWhatsApp }) => {
+const Hero = ({ onBookWhatsApp, salonSettings = {} }) => {
+  const phone = salonSettings.phoneNumber || '+91 9326899376';
+
   return (
     <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
       {/* Background Image with Dark Glassy Overlay */}
@@ -41,7 +43,7 @@ const Hero = ({ onBookWhatsApp }) => {
             Book via WhatsApp
           </MagneticButton>
           <span className="block mt-2 text-xs text-cream-muted tracking-widest font-sans font-light uppercase">
-            WhatsApp or Call: <span className="text-gold font-medium">+91 9326899376</span>
+            WhatsApp or Call: <span className="text-gold font-medium">{phone}</span>
           </span>
         </div>
       </div>

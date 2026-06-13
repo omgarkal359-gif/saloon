@@ -1,7 +1,10 @@
 import React from 'react';
 import { Instagram } from 'lucide-react';
 
-const InstagramGallery = () => {
+const InstagramGallery = ({ instagramUrl = 'https://instagram.com' }) => {
+  // Extract handle from URL for display
+  const handle = instagramUrl.replace(/https?:\/\/(www\.)?instagram\.com\/?/, '').replace(/\/$/, '') || 'ForeverBeautySalon';
+
   return (
     <div className="w-full">
       <div className="flex items-center gap-2 mb-6">
@@ -10,7 +13,7 @@ const InstagramGallery = () => {
           On Instagram
         </span>
         <span className="text-xs text-gold/60 font-sans tracking-wide">
-          @ForeverBeautySalon
+          @{handle}
         </span>
       </div>
 
@@ -26,12 +29,12 @@ const InstagramGallery = () => {
           </p>
         </div>
         <a 
-          href="https://instagram.com" 
+          href={instagramUrl} 
           target="_blank" 
           rel="noopener noreferrer" 
           className="mt-2 text-[10px] text-gold uppercase tracking-widest font-sans border-b border-gold/30 pb-0.5 hover:text-gold-light hover:border-gold-light transition-colors"
         >
-          Follow @ForeverBeautySalon
+          Follow @{handle}
         </a>
       </div>
     </div>

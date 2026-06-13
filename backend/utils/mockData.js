@@ -7,6 +7,8 @@ const __dirname = path.dirname(__filename);
 const SERVICES_FILE = path.join(__dirname, '..', 'mock_services.json');
 const APPOINTMENTS_FILE = path.join(__dirname, '..', 'mock_appointments.json');
 const INQUIRIES_FILE = path.join(__dirname, '..', 'mock_inquiries.json');
+const SETTINGS_FILE = path.join(__dirname, '..', 'mock_settings.json');
+const TRANSFORMATIONS_FILE = path.join(__dirname, '..', 'mock_transformations.json');
 
 // Default initial catalog
 const defaultServices = [
@@ -156,6 +158,28 @@ try {
   console.warn('Could not initialize mock inquiries file:', err.message);
 }
 
+const defaultSettings = {
+  phoneNumber: '+91 9326899376',
+  location: 'Shop No. 2, Plot No. 13, Mahavir Sparsh, Sector-3, Ulwe, Navi Mumbai - 410206',
+  instagramUrl: 'https://instagram.com/foreverbeautysalon'
+};
+
+try {
+  if (!fs.existsSync(SETTINGS_FILE)) {
+    fs.writeFileSync(SETTINGS_FILE, JSON.stringify(defaultSettings, null, 2));
+  }
+} catch (err) {
+  console.warn('Could not initialize mock settings file:', err.message);
+}
+
+try {
+  if (!fs.existsSync(TRANSFORMATIONS_FILE)) {
+    fs.writeFileSync(TRANSFORMATIONS_FILE, JSON.stringify([]));
+  }
+} catch (err) {
+  console.warn('Could not initialize mock transformations file:', err.message);
+}
+
 // ----------------------------------------------------
 // Service CRUD Fallbacks
 // ----------------------------------------------------
@@ -286,5 +310,66 @@ export const resolveMockInquiry = (id) => {
   } catch (error) {
     console.error('Error resolving mock inquiry:', error);
     return null;
+  }
+};
+
+// Settings CRUD
+export const getMockSettings = () => {
+  try {
+    const data = fs.readFileSync(SETTINGS_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading mock settings:', error);
+    return defaultSettings;
+  }
+};
+
+export const saveMockSettings = (settings) => {
+  try {
+    fs.writeFileSync(SETTINGS_FILE, JSON.stringify(settings, null, 2));
+    return settings;
+  } catch (error) {
+    console.error('Error saving mock settings:', error);
+    return null;
+  }
+};
+
+// Transformations CRUD
+export const getMockTransformations = () => {
+  try {
+    const data = fs.readFileSync(TRANSFORMATIONS_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading mock transformations:', error);
+    return [];
+  }
+};
+
+export const saveMockTransformation = (transformation) => {
+  try {
+    const items = getMockTransformations();
+    const newItem = {
+      _id: `mock_trans_${Date.now()}`,
+      createdAt: new Date().toISOString(),
+      ...transformation
+    };
+    items.push(newItem);
+    fs.writeFileSync(TRANSFORMATIONS_FILE, JSON.stringify(items, null, 2));
+    return newItem;
+  } catch (error) {
+    console.error('Error saving mock transformation:', error);
+    return null;
+  }
+};
+
+export const deleteMockTransformation = (id) => {
+  try {
+    const items = getMockTransformations();
+    const filtered = items.filter(item => item._id.toString() !== id.toString());
+    fs.writeFileSync(TRANSFORMATIONS_FILE, JSON.stringify(filtered, null, 2));
+    return true;
+  } catch (error) {
+    console.error('Error deleting mock transformation:', error);
+    return false;
   }
 };

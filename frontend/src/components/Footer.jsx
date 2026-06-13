@@ -1,12 +1,12 @@
 import React from 'react';
 import InstagramGallery from './InstagramGallery';
 
-const Footer = ({ onAdminClick }) => {
+const Footer = ({ onAdminClick, salonSettings = {} }) => {
   return (
     <footer className="bg-charcoal-dark border-t border-gold/10 pt-16 pb-10 text-cream-dark">
       <div className="max-w-6xl mx-auto px-6 mb-12">
         {/* Instagram Gallery Widget */}
-        <InstagramGallery />
+        <InstagramGallery instagramUrl={salonSettings.instagramUrl} />
       </div>
 
       {/* Bottom Bar */}

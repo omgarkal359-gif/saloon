@@ -1,7 +1,10 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock, ShieldCheck, Calendar, Sparkles } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ShieldCheck, Calendar, Sparkles, Instagram } from 'lucide-react';
 
-const Salon = () => {
+const Salon = ({ salonSettings = {} }) => {
+  const phone = salonSettings.phoneNumber || '+91 9326899376';
+  const location = salonSettings.location || 'Shop No. 2, Plot No. 13, Mahavir Sparsh, Sector-3, Ulwe, Navi Mumbai - 410206';
+
   return (
     <section id="about" className="py-24 bg-charcoal-dark border-t border-gold/10 relative overflow-hidden">
       {/* Decorative background glow */}
@@ -46,16 +49,27 @@ const Salon = () => {
               <div className="flex flex-col gap-4 text-sm font-sans font-light text-cream-dark">
                 <div className="flex items-start gap-3.5 group/item">
                   <MapPin className="text-gold w-5 h-5 shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform" />
-                  <span className="leading-snug">Shop No. 2, Plot No. 13, Mahavir Sparsh, Sector-3, Ulwe, Navi Mumbai - 410206</span>
+                  <span className="leading-snug">{location}</span>
                 </div>
                 <div className="flex items-center gap-3.5 group/item">
                   <Phone className="text-gold w-5 h-5 shrink-0 group-hover/item:scale-110 transition-transform" />
-                  <span>+91 9326899376 (Call or WhatsApp)</span>
+                  <span>{phone} (Call or WhatsApp)</span>
                 </div>
                 <div className="flex items-center gap-3.5 group/item">
                   <Mail className="text-gold w-5 h-5 shrink-0 group-hover/item:scale-110 transition-transform" />
                   <span>info@foreverbeautysalon.com</span>
                 </div>
+                {salonSettings.instagramUrl && (
+                  <a
+                    href={salonSettings.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3.5 group/item hover:text-gold transition-colors"
+                  >
+                    <Instagram className="text-gold w-5 h-5 shrink-0 group-hover/item:scale-110 transition-transform" />
+                    <span>Follow us on Instagram</span>
+                  </a>
+                )}
               </div>
             </div>
 

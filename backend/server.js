@@ -5,6 +5,8 @@ import connectDB from './config/db.js';
 import appointmentRoutes from './routes/appointmentRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import inquiryRoutes from './routes/inquiryRoutes.js';
+import settingsRoutes from './routes/settingsRoutes.js';
+import transformationRoutes from './routes/transformationRoutes.js';
 
 // Load env variables
 dotenv.config();
@@ -16,16 +18,19 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: '*', // For local development: allow any source to connect
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Routes
 app.use('/api/appointments', appointmentRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/inquiries', inquiryRoutes);
+app.use('/api/settings', settingsRoutes);
+app.use('/api/transformations', transformationRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
