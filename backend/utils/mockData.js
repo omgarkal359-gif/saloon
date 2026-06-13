@@ -4,9 +4,12 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const MOCK_DB_FILE = path.join(__dirname, '..', 'mock_appointments.json');
+const SERVICES_FILE = path.join(__dirname, '..', 'mock_services.json');
+const APPOINTMENTS_FILE = path.join(__dirname, '..', 'mock_appointments.json');
+const INQUIRIES_FILE = path.join(__dirname, '..', 'mock_inquiries.json');
 
-export const mockServices = [
+// Default initial catalog
+const defaultServices = [
   // TAB 1: Hair & Styling
   {
     _id: '666ab1234567890123456781',
@@ -128,14 +131,81 @@ export const mockServices = [
   }
 ];
 
-// Read appointments from mock file
+// Initialize JSON files if missing
+if (!fs.existsSync(SERVICES_FILE)) {
+  fs.writeFileSync(SERVICES_FILE, JSON.stringify(defaultServices, null, 2));
+}
+if (!fs.existsSync(APPOINTMENTS_FILE)) {
+  fs.writeFileSync(APPOINTMENTS_FILE, JSON.stringify([]));
+}
+if (!fs.existsSync(INQUIRIES_FILE)) {
+  fs.writeFileSync(INQUIRIES_FILE, JSON.stringify([]));
+}
+
+// ----------------------------------------------------
+// Service CRUD Fallbacks
+// ----------------------------------------------------
+export const getMockServices = () => {
+  try {
+    const data = fs.readFileSync(SERVICES_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading mock services:', error);
+    return defaultServices;
+  }
+};
+
+export const saveMockService = (service) => {
+  try {
+    const services = getMockServices();
+    const newService = {
+      _id: `mock_svc_${Date.now()}`,
+      ...service,
+    };
+    services.push(newService);
+    fs.writeFileSync(SERVICES_FILE, JSON.stringify(services, null, 2));
+    return newService;
+  } catch (error) {
+    console.error('Error saving mock service:', error);
+    return null;
+  }
+};
+
+export const updateMockService = (id, updatedData) => {
+  try {
+    const services = getMockServices();
+    const idx = services.findIndex(s => s._id.toString() === id.toString());
+    if (idx === -1) return null;
+    services[idx] = { ...services[idx], ...updatedData };
+    fs.writeFileSync(SERVICES_FILE, JSON.stringify(services, null, 2));
+    return services[idx];
+  } catch (error) {
+    console.error('Error updating mock service:', error);
+    return null;
+  }
+};
+
+export const deleteMockService = (id) => {
+  try {
+    const services = getMockServices();
+    const filtered = services.filter(s => s._id.toString() !== id.toString());
+    fs.writeFileSync(SERVICES_FILE, JSON.stringify(filtered, null, 2));
+    return true;
+  } catch (error) {
+    console.error('Error deleting mock service:', error);
+    return false;
+  }
+};
+
+// Expose mockServices dynamically
+export const mockServices = getMockServices();
+
+// ----------------------------------------------------
+// Appointment Fallbacks
+// ----------------------------------------------------
 export const getMockAppointments = () => {
   try {
-    if (!fs.existsSync(MOCK_DB_FILE)) {
-      fs.writeFileSync(MOCK_DB_FILE, JSON.stringify([]));
-      return [];
-    }
-    const data = fs.readFileSync(MOCK_DB_FILE, 'utf8');
+    const data = fs.readFileSync(APPOINTMENTS_FILE, 'utf8');
     return JSON.parse(data);
   } catch (error) {
     console.error('Error reading mock appointments:', error);
@@ -143,7 +213,6 @@ export const getMockAppointments = () => {
   }
 };
 
-// Write appointment to mock file
 export const saveMockAppointment = (appointment) => {
   try {
     const appointments = getMockAppointments();
@@ -153,10 +222,55 @@ export const saveMockAppointment = (appointment) => {
       createdAt: new Date().toISOString()
     };
     appointments.push(newAppointment);
-    fs.writeFileSync(MOCK_DB_FILE, JSON.stringify(appointments, null, 2));
+    fs.writeFileSync(APPOINTMENTS_FILE, JSON.stringify(appointments, null, 2));
     return newAppointment;
   } catch (error) {
     console.error('Error saving mock appointment:', error);
+    return null;
+  }
+};
+
+// ----------------------------------------------------
+// Inquiry Fallbacks
+// ----------------------------------------------------
+export const getMockInquiries = () => {
+  try {
+    const data = fs.readFileSync(INQUIRIES_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading mock inquiries:', error);
+    return [];
+  }
+};
+
+export const saveMockInquiry = (inquiry) => {
+  try {
+    const inquiries = getMockInquiries();
+    const newInquiry = {
+      _id: `mock_inq_${Date.now()}`,
+      status: 'unread',
+      ...inquiry,
+      createdAt: new Date().toISOString()
+    };
+    inquiries.push(newInquiry);
+    fs.writeFileSync(INQUIRIES_FILE, JSON.stringify(inquiries, null, 2));
+    return newInquiry;
+  } catch (error) {
+    console.error('Error saving mock inquiry:', error);
+    return null;
+  }
+};
+
+export const resolveMockInquiry = (id) => {
+  try {
+    const inquiries = getMockInquiries();
+    const idx = inquiries.findIndex(i => i._id.toString() === id.toString());
+    if (idx === -1) return null;
+    inquiries[idx].status = 'resolved';
+    fs.writeFileSync(INQUIRIES_FILE, JSON.stringify(inquiries, null, 2));
+    return inquiries[idx];
+  } catch (error) {
+    console.error('Error resolving mock inquiry:', error);
     return null;
   }
 };

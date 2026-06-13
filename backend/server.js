@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import appointmentRoutes from './routes/appointmentRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
+import inquiryRoutes from './routes/inquiryRoutes.js';
 
 // Load env variables
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(express.json());
 // Routes
 app.use('/api/appointments', appointmentRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api/inquiries', inquiryRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

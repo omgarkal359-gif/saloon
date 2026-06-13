@@ -2,7 +2,7 @@ import React from 'react';
 import InstagramGallery from './InstagramGallery';
 import { MapPin, Phone, Mail, Clock, ShieldCheck } from 'lucide-react';
 
-const Footer = () => {
+const Footer = ({ onAdminClick }) => {
   return (
     <footer id="about" className="bg-charcoal-dark border-t border-gold/20 pt-20 pb-10 text-cream-dark">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
@@ -92,7 +92,12 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="max-w-6xl mx-auto px-6 pt-8 border-t border-gold/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-sans font-light text-cream-muted">
-        <p>&copy; {new Date().getFullYear()} Forever Beauty Salon. All Rights Reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Forever Beauty Salon. All Rights Reserved. &bull;{' '}
+          <span onClick={onAdminClick} className="hover:text-gold cursor-pointer transition-colors">
+            Admin Portal
+          </span>
+        </p>
         <div className="flex gap-6">
           <span className="hover:text-gold cursor-pointer transition-colors">Privacy Policy</span>
           <span className="hover:text-gold cursor-pointer transition-colors">Terms of Service</span>

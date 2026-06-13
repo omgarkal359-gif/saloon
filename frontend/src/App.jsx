@@ -4,7 +4,9 @@ import Hero from './components/Hero';
 import ServiceMenu from './components/ServiceMenu';
 import BeforeAfterSlider from './components/BeforeAfterSlider';
 import Stylists from './components/Stylists';
+import InquiryForm from './components/InquiryForm';
 import Footer from './components/Footer';
+import AdminPanel from './components/AdminPanel';
 
 // Static fallback services catalog in case backend is loading or unreachable
 const FALLBACK_SERVICES = [
@@ -125,32 +127,47 @@ const FALLBACK_SERVICES = [
 function App() {
   const [services, setServices] = useState(FALLBACK_SERVICES);
   const [loading, setLoading] = useState(true);
+  const [view, setView] = useState('home'); // 'home' or 'admin'
 
   const API_BASE_URL = 'http://localhost:5000/api';
 
   // Fetch services from Backend
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/services`);
-        const data = await response.json();
-        if (data.success && data.services && data.services.length > 0) {
-          setServices(data.services);
-        }
-      } catch (error) {
-        console.warn('Backend API service catalog fetch failed. Falling back to static data.', error);
-      } finally {
-        setLoading(false);
+  const fetchServices = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/services`);
+      const data = await response.json();
+      if (data.success && data.services && data.services.length > 0) {
+        setServices(data.services);
       }
-    };
+    } catch (error) {
+      console.warn('Backend API service catalog fetch failed. Falling back to static data.', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchServices();
+
+    // Support typing ?admin in the browser URL to immediately access gateway
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('admin')) {
+      setView('admin');
+    }
   }, []);
+
+  // Sync services when entering home view (to refresh dynamic changes)
+  useEffect(() => {
+    if (view === 'home') {
+      fetchServices();
+    }
+  }, [view]);
 
   // Setup Scroll-Driven Reveal (IntersectionObserver)
   useEffect(() => {
+    if (view !== 'home' || loading) return;
+
     const reveals = document.querySelectorAll('.reveal');
-    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -160,8 +177,8 @@ function App() {
         });
       },
       {
-        threshold: 0.1, // trigger reveal when 10% of element is in view
-        rootMargin: '0px 0px -50px 0px' // offset slightly from bottom viewport
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
       }
     );
 
@@ -170,7 +187,7 @@ function App() {
     return () => {
       reveals.forEach((reveal) => observer.unobserve(reveal));
     };
-  }, [loading, services]); // re-run when content loads or changes
+  }, [loading, services, view]);
 
   const handleBookWhatsApp = () => {
     const text = encodeURIComponent("Hello Forever Beauty Salon! I would like to inquire about booking a treatment.");
@@ -184,8 +201,12 @@ function App() {
     }
   };
 
+  if (view === 'admin') {
+    return <AdminPanel onBack={() => setView('home')} />;
+  }
+
   return (
-    <div className="relative min-h-screen bg-charcoal text-cream font-sans antialiased">
+    <div className="relative min-h-screen bg-charcoal text-cream font-sans antialiased animate-fade-in">
       {/* Navigation Header */}
       <Navbar onContactUs={handleContactUs} />
 
@@ -198,10 +219,12 @@ function App() {
         <BeforeAfterSlider />
         
         <Stylists />
+
+        <InquiryForm />
       </main>
 
       {/* Footer Details */}
-      <Footer />
+      <Footer onAdminClick={() => setView('admin')} />
     </div>
   );
 }
