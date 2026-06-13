@@ -40,6 +40,9 @@ const Hero = ({ onBookWhatsApp }) => {
           <MagneticButton onClick={onBookWhatsApp} className="py-4 px-10 text-sm font-semibold tracking-widest shadow-gold/15">
             Book via WhatsApp
           </MagneticButton>
+          <span className="block mt-3 text-xs text-cream-muted tracking-widest font-sans font-light uppercase">
+            WhatsApp or Call: <span className="text-gold font-medium">+91 9326899376</span>
+          </span>
         </div>
       </div>
 
