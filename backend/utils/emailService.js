@@ -39,7 +39,7 @@ export const sendConfirmationEmail = async (appointment) => {
          <hr style="border: 0; border-top: 1px solid #D4AF37; margin: 25px 0;" />
          <p style="font-size: 12px; color: #A8A29E; line-height: 1.5; margin-bottom: 0;">
            Forever Beauty Salon<br/>
-           Luxury Suite 101, Serenity Square<br/>
+           Shop No. 2, Plot No. 13, Mahavir Sparsh, Sector-3, Ulwe, Navi Mumbai - 410206<br/>
            WhatsApp / Call: +1 (555) 987-6543 | Email: info@foreverbeautysalon.com
          </p>
       </div>

@@ -28,7 +28,7 @@ const Footer = () => {
           <div className="flex flex-col gap-3 text-sm font-sans font-light">
             <div className="flex items-center gap-3">
               <MapPin className="text-gold w-4 h-4 shrink-0" />
-              <span>Suite 101, Serenity Square, Luxury District</span>
+              <span>Shop No. 2, Plot No. 13, Mahavir Sparsh, Sector-3, Ulwe, Navi Mumbai - 410206</span>
             </div>
             <div className="flex items-center gap-3">
               <Phone className="text-gold w-4 h-4 shrink-0" />
