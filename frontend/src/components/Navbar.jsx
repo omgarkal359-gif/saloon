@@ -34,12 +34,7 @@ const Navbar = ({ onContactUs }) => {
         >
           Transformations
         </button>
-        <button 
-          onClick={() => scrollToSection('stylists')} 
-          className="hover:text-gold transition-colors duration-300"
-        >
-          Our Stylists
-        </button>
+
         <button 
           onClick={() => scrollToSection('about')} 
           className="hover:text-gold transition-colors duration-300"
