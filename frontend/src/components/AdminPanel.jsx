@@ -196,7 +196,7 @@ const AdminPanel = ({ onBack }) => {
 
           <div className="text-center">
             <h1 className="font-serif text-2xl text-cream mb-1">Administrative Gateway</h1>
-            <p className="text-cream-muted text-xs font-sans tracking-wide uppercase">Forever Beauty Sanctuary Control</p>
+            <p className="text-cream-muted text-xs font-sans tracking-wide uppercase">Forever Beauty Saloon Control</p>
           </div>
 
           {loginError && (
@@ -235,7 +235,7 @@ const AdminPanel = ({ onBack }) => {
           </div>
           <div>
             <h1 className="font-serif text-2xl text-gold tracking-widest uppercase">Admin Workspace</h1>
-            <span className="text-xs text-cream-muted uppercase tracking-widest font-light block mt-0.5">Forever Beauty Sanctuary Management</span>
+            <span className="text-xs text-cream-muted uppercase tracking-widest font-light block mt-0.5">Forever Beauty Saloon Management</span>
           </div>
         </div>
 

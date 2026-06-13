@@ -13,7 +13,7 @@ const Footer = ({ onAdminClick }) => {
       <div className="max-w-6xl mx-auto px-6 pt-8 border-t border-gold/10 flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-sans font-light text-cream-muted">
         <div className="flex flex-col gap-1 items-center md:items-start">
           <h3 className="font-serif text-lg text-gold tracking-widest uppercase mb-0.5">Forever Beauty</h3>
-          <p className="text-[10px] text-cream-muted uppercase tracking-widest font-sans font-light">Sanctuary of Timeless Beauty</p>
+          <p className="text-[10px] text-cream-muted uppercase tracking-widest font-sans font-light">Saloon of Timeless Beauty</p>
         </div>
         <p className="text-center md:text-left">
           &copy; {new Date().getFullYear()} Forever Beauty Salon. All Rights Reserved. &bull;{' '}

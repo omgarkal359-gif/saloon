@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock, ShieldCheck, Calendar, Sparkles } from 'lucide-react';
 
-const Sanctuary = () => {
+const Saloon = () => {
   return (
     <section id="about" className="py-24 bg-charcoal-dark border-t border-gold/10 relative overflow-hidden">
       {/* Decorative background glow */}
@@ -11,8 +11,8 @@ const Sanctuary = () => {
         
         {/* Section Header */}
         <div className="text-center mb-16 reveal">
-          <span className="text-gold uppercase tracking-widest text-xs font-semibold block mb-3">Our Haven</span>
-          <h2 className="text-4xl md:text-5xl font-light text-cream mb-4 font-serif">The Sanctuary</h2>
+          <span className="text-gold uppercase tracking-widest text-xs font-semibold block mb-3">Our Saloon</span>
+          <h2 className="text-4xl md:text-5xl font-light text-cream mb-4 font-serif">The Saloon</h2>
           <p className="text-cream-muted max-w-xl mx-auto font-sans font-light tracking-wide text-sm md:text-base leading-relaxed">
             Welcome to a private luxury retreat designed exclusively for ladies, nurturing absolute peace, comfort, and premium self-care.
           </p>
@@ -37,7 +37,7 @@ const Sanctuary = () => {
               </div>
 
               <p className="text-sm text-cream-dark font-sans font-light leading-relaxed">
-                Forever Beauty is strictly a women-only sanctuary. No male entry is permitted, ensuring complete relaxation, freedom, and security during your personalized hair, skin, and nail treatments.
+                Forever Beauty is strictly a women-only saloon. No male entry is permitted, ensuring complete relaxation, freedom, and security during your personalized hair, skin, and nail treatments.
               </p>
 
               <div className="h-px bg-gold/10 my-2" />
@@ -50,7 +50,7 @@ const Sanctuary = () => {
                 </div>
                 <div className="flex items-center gap-3.5 group/item">
                   <Phone className="text-gold w-5 h-5 shrink-0 group-hover/item:scale-110 transition-transform" />
-                  <span>+1 (555) 987-6543 (Call or WhatsApp)</span>
+                  <span>+91 9326899376 (Call or WhatsApp)</span>
                 </div>
                 <div className="flex items-center gap-3.5 group/item">
                   <Mail className="text-gold w-5 h-5 shrink-0 group-hover/item:scale-110 transition-transform" />
@@ -139,4 +139,4 @@ const Sanctuary = () => {
   );
 };
 
-export default Sanctuary;
+export default Saloon;

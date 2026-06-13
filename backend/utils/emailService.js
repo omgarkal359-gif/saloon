@@ -40,7 +40,7 @@ export const sendConfirmationEmail = async (appointment) => {
          <p style="font-size: 12px; color: #A8A29E; line-height: 1.5; margin-bottom: 0;">
            Forever Beauty Salon<br/>
            Shop No. 2, Plot No. 13, Mahavir Sparsh, Sector-3, Ulwe, Navi Mumbai - 410206<br/>
-           WhatsApp / Call: +1 (555) 987-6543 | Email: info@foreverbeautysalon.com
+           WhatsApp / Call: +91 9326899376 | Email: info@foreverbeautysalon.com
          </p>
       </div>
     </div>

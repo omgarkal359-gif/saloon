@@ -5,7 +5,7 @@ import ServiceMenu from './components/ServiceMenu';
 import BeforeAfterSlider from './components/BeforeAfterSlider';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
-import Sanctuary from './components/Sanctuary';
+import Saloon from './components/Saloon';
 
 // Static fallback services catalog in case backend is loading or unreachable
 const FALLBACK_SERVICES = [
@@ -190,7 +190,7 @@ function App() {
 
   const handleBookWhatsApp = () => {
     const text = encodeURIComponent("Hello Forever Beauty Salon! I would like to inquire about booking a treatment.");
-    window.open(`https://wa.me/15559876543?text=${text}`, '_blank');
+    window.open(`https://wa.me/919326899376?text=${text}`, '_blank');
   };
 
   const handleContactUs = () => {
@@ -217,7 +217,7 @@ function App() {
         
         <BeforeAfterSlider />
         
-        <Sanctuary />
+        <Saloon />
       </main>
 
       {/* Footer Details */}

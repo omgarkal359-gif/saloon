@@ -24,7 +24,7 @@ const ServiceMenu = ({ services }) => {
           <span className="text-gold uppercase tracking-widest text-xs font-semibold block mb-3">Indulge Yourself</span>
           <h2 className="text-4xl md:text-5xl font-light text-cream mb-4 font-serif">Our Treatment Menu</h2>
           <p className="text-cream-muted max-w-xl mx-auto font-sans font-light tracking-wide">
-            Explore our curated service offerings. To book a session, please reach out to us directly on WhatsApp or visit our sanctuary.
+            Explore our curated service offerings. To book a session, please reach out to us directly on WhatsApp or visit our saloon.
           </p>
         </div>
 
