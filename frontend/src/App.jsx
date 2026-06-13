@@ -4,7 +4,6 @@ import Hero from './components/Hero';
 import ServiceMenu from './components/ServiceMenu';
 import BeforeAfterSlider from './components/BeforeAfterSlider';
 import Stylists from './components/Stylists';
-import InquiryForm from './components/InquiryForm';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
 
@@ -219,8 +218,6 @@ function App() {
         <BeforeAfterSlider />
         
         <Stylists />
-
-        <InquiryForm />
       </main>
 
       {/* Footer Details */}
