@@ -22,7 +22,7 @@ const AdminPanel = ({ onBack }) => {
   const [description, setDescription] = useState('');
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
-  const ADMIN_PASSWORD = 'ForeverAdmin2026';
+  const ADMIN_PASSWORD = '123456789';
 
   const handleLogin = (e) => {
     e.preventDefault();
