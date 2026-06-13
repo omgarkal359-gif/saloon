@@ -91,10 +91,10 @@ const Salon = () => {
                   </div>
                 </div>
                 <div className="flex flex-col pb-2">
-                  <span className="text-xs text-gold uppercase tracking-widest font-medium mb-0.5">Sundays</span>
-                  <div className="flex justify-between items-center text-gold">
-                    <span>Exclusive VIP Only</span>
-                    <span className="text-gold text-xs font-medium bg-gold/20 px-2 py-0.5 rounded border border-gold/20">10:00 AM - 8:30 PM</span>
+                  <span className="text-xs text-cream-muted uppercase tracking-widest font-medium mb-0.5">Sundays</span>
+                  <div className="flex justify-between items-center">
+                    <span>Sunday</span>
+                    <span className="text-cream text-xs font-medium bg-gold/10 px-2 py-0.5 rounded border border-gold/10">10:00 AM - 8:30 PM</span>
                   </div>
                 </div>
               </div>
