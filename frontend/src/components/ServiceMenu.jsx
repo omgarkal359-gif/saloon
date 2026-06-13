@@ -69,9 +69,6 @@ const ServiceMenu = ({ services }) => {
                   <div className="text-cream-muted text-xs font-sans font-light tracking-wide">
                     Duration: <span className="text-gold font-medium">{service.duration} mins</span>
                   </div>
-                  <div className="text-gold font-serif text-xl font-normal">
-                    ₹{service.price}
-                  </div>
                 </div>
               </div>
             );
