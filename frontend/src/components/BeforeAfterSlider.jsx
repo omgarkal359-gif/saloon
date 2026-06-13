@@ -59,6 +59,7 @@ const BeforeAfterSlider = () => {
         <div 
           ref={containerRef}
           className="reveal relative aspect-[4/3] md:aspect-[16/9] w-full max-w-4xl mx-auto rounded-xl overflow-hidden border border-gold/20 shadow-2xl select-none"
+          style={{ touchAction: 'none' }}
           onMouseDown={() => setIsDragging(true)}
           onTouchStart={() => setIsDragging(true)}
           onMouseMove={handleMouseMove}
