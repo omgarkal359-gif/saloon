@@ -64,12 +64,6 @@ const ServiceMenu = ({ services }) => {
                     </p>
                   </div>
                 </div>
-
-                <div className="flex justify-between items-center border-t border-gold/10 pt-4 mt-2">
-                  <div className="text-cream-muted text-xs font-sans font-light tracking-wide">
-                    Duration: <span className="text-gold font-medium">{service.duration} mins</span>
-                  </div>
-                </div>
               </div>
             );
           })}
