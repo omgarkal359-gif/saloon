@@ -36,18 +36,18 @@ const Hero = ({ onBookWhatsApp }) => {
         </p>
 
         {/* Floating Magnetic CTA Button */}
-        <div className="reveal active mt-8">
+        <div className="reveal active mt-6 md:mt-8">
           <MagneticButton onClick={onBookWhatsApp} className="py-4 px-10 text-sm font-semibold tracking-widest shadow-gold/15">
             Book via WhatsApp
           </MagneticButton>
-          <span className="block mt-3 text-xs text-cream-muted tracking-widest font-sans font-light uppercase">
+          <span className="block mt-2 text-xs text-cream-muted tracking-widest font-sans font-light uppercase">
             WhatsApp or Call: <span className="text-gold font-medium">+91 9326899376</span>
           </span>
         </div>
       </div>
 
       {/* Scroll Down Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream-muted text-xs tracking-widest uppercase pointer-events-none opacity-60">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-cream-muted text-xs tracking-widest uppercase pointer-events-none opacity-60">
         <span>Scroll to Explore</span>
         <div className="w-[1px] h-12 bg-gold/40 relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-4 bg-gold animate-bounce" />
