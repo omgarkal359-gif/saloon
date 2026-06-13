@@ -10,7 +10,7 @@ const InstagramGallery = () => {
           On Instagram
         </span>
         <span className="text-xs text-gold/60 font-sans tracking-wide">
-          @ForeverBeautySaloon
+          @ForeverBeautySalon
         </span>
       </div>
 
@@ -31,7 +31,7 @@ const InstagramGallery = () => {
           rel="noopener noreferrer" 
           className="mt-2 text-[10px] text-gold uppercase tracking-widest font-sans border-b border-gold/30 pb-0.5 hover:text-gold-light hover:border-gold-light transition-colors"
         >
-          Follow @ForeverBeautySaloon
+          Follow @ForeverBeautySalon
         </a>
       </div>
     </div>

@@ -39,7 +39,7 @@ const Navbar = ({ onContactUs }) => {
           onClick={() => scrollToSection('about')} 
           className="hover:text-gold transition-colors duration-300"
         >
-          Our Saloon
+          Our Salon
         </button>
       </div>
 

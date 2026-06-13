@@ -1,2 +1,2 @@
-# saloon
+# salon
 project for client

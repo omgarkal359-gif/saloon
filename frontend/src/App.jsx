@@ -5,7 +5,7 @@ import ServiceMenu from './components/ServiceMenu';
 import BeforeAfterSlider from './components/BeforeAfterSlider';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
-import Saloon from './components/Saloon';
+import Salon from './components/Salon';
 
 // Static fallback services catalog in case backend is loading or unreachable
 const FALLBACK_SERVICES = [
@@ -217,7 +217,7 @@ function App() {
         
         <BeforeAfterSlider />
         
-        <Saloon />
+        <Salon />
       </main>
 
       {/* Footer Details */}
