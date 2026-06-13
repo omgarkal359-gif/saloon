@@ -2,7 +2,7 @@ import React from 'react';
 import MagneticButton from './MagneticButton';
 import heroBg from '../assets/salon_hero_bg.png';
 
-const Hero = ({ onOpenBooking }) => {
+const Hero = ({ onBookWhatsApp }) => {
   return (
     <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
       {/* Background Image with Dark Glassy Overlay */}
@@ -37,8 +37,8 @@ const Hero = ({ onOpenBooking }) => {
 
         {/* Floating Magnetic CTA Button */}
         <div className="reveal active mt-8">
-          <MagneticButton onClick={onOpenBooking} className="py-4 px-10 text-sm font-semibold tracking-widest shadow-gold/15">
-            Reserve Your Experience
+          <MagneticButton onClick={onBookWhatsApp} className="py-4 px-10 text-sm font-semibold tracking-widest shadow-gold/15">
+            Book via WhatsApp
           </MagneticButton>
         </div>
       </div>

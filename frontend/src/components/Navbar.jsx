@@ -2,7 +2,7 @@ import React from 'react';
 import MagneticButton from './MagneticButton';
 import { Sparkles } from 'lucide-react';
 
-const Navbar = ({ onOpenBooking }) => {
+const Navbar = ({ onContactUs }) => {
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (el) {
@@ -48,10 +48,10 @@ const Navbar = ({ onOpenBooking }) => {
         </button>
       </div>
 
-      {/* Book Button */}
+      {/* Contact Button */}
       <div>
-        <MagneticButton onClick={onOpenBooking} className="py-2 px-6 text-xs">
-          Book Appointment
+        <MagneticButton onClick={onContactUs} className="py-2 px-6 text-xs">
+          Contact Us
         </MagneticButton>
       </div>
     </nav>

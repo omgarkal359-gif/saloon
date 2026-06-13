@@ -5,7 +5,6 @@ import ServiceMenu from './components/ServiceMenu';
 import BeforeAfterSlider from './components/BeforeAfterSlider';
 import Stylists from './components/Stylists';
 import Footer from './components/Footer';
-import BookingModal from './components/BookingModal';
 
 // Static fallback services catalog in case backend is loading or unreachable
 const FALLBACK_SERVICES = [
@@ -125,8 +124,6 @@ const FALLBACK_SERVICES = [
 
 function App() {
   const [services, setServices] = useState(FALLBACK_SERVICES);
-  const [selectedServices, setSelectedServices] = useState([]);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const API_BASE_URL = 'http://localhost:5000/api';
@@ -175,41 +172,28 @@ function App() {
     };
   }, [loading, services]); // re-run when content loads or changes
 
-  // Service toggle selection
-  const handleToggleService = (service) => {
-    setSelectedServices(prev => {
-      const exists = prev.some(s => s._id === service._id);
-      if (exists) {
-        return prev.filter(s => s._id !== service._id);
-      } else {
-        return [...prev, service];
-      }
-    });
+  const handleBookWhatsApp = () => {
+    const text = encodeURIComponent("Hello Forever Beauty Salon! I would like to inquire about booking a treatment.");
+    window.open(`https://wa.me/15559876543?text=${text}`, '_blank');
   };
 
-  const handleClearSelection = () => {
-    setSelectedServices([]);
-  };
-
-  const handleOpenBooking = () => {
-    setIsBookingOpen(true);
+  const handleContactUs = () => {
+    const el = document.getElementById('about');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <div className="relative min-h-screen bg-charcoal text-cream font-sans antialiased">
       {/* Navigation Header */}
-      <Navbar onOpenBooking={handleOpenBooking} />
+      <Navbar onContactUs={handleContactUs} />
 
       {/* Main Luxury Content Sections */}
       <main>
-        <Hero onOpenBooking={handleOpenBooking} />
+        <Hero onBookWhatsApp={handleBookWhatsApp} />
         
-        <ServiceMenu 
-          services={services}
-          selectedServices={selectedServices}
-          onToggleService={handleToggleService}
-          onBookNow={handleOpenBooking}
-        />
+        <ServiceMenu services={services} />
         
         <BeforeAfterSlider />
         
@@ -218,16 +202,6 @@ function App() {
 
       {/* Footer Details */}
       <Footer />
-
-      {/* 3-Step Booking Wizard Modal */}
-      <BookingModal 
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
-        services={services}
-        selectedServices={selectedServices}
-        onToggleService={handleToggleService}
-        onClearSelection={handleClearSelection}
-      />
     </div>
   );
 }
