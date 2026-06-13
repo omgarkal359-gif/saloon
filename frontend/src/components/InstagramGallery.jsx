@@ -1,36 +1,5 @@
 import React from 'react';
-import mehndiImg from '../assets/gallery_mehndi.png';
-import nailsImg from '../assets/gallery_nails.png';
-import makeupImg from '../assets/gallery_makeup.png';
-import spaImg from '../assets/gallery_spa.png';
-import { Heart, MessageCircle, Instagram } from 'lucide-react';
-
-const galleryItems = [
-  {
-    image: mehndiImg,
-    likes: '1.2k',
-    comments: '84',
-    tag: '#MehndiArt'
-  },
-  {
-    image: makeupImg,
-    likes: '958',
-    comments: '46',
-    tag: '#BridalGlam'
-  },
-  {
-    image: nailsImg,
-    likes: '1.4k',
-    comments: '112',
-    tag: '#LuxuryNails'
-  },
-  {
-    image: spaImg,
-    likes: '820',
-    comments: '39',
-    tag: '#SpaSanctuary'
-  }
-];
+import { Instagram } from 'lucide-react';
 
 const InstagramGallery = () => {
   return (
@@ -45,35 +14,25 @@ const InstagramGallery = () => {
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        {galleryItems.map((item, index) => (
-          <div 
-            key={index}
-            className="group relative aspect-square rounded-lg overflow-hidden border border-gold/10 cursor-pointer"
-          >
-            {/* Gallery Image */}
-            <img 
-              src={item.image} 
-              alt={item.tag} 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-
-            {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-charcoal-dark/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
-              <span className="text-gold text-xs tracking-wider font-sans mb-1">{item.tag}</span>
-              <div className="flex items-center gap-4 text-cream text-sm">
-                <div className="flex items-center gap-1.5 hover:text-gold transition-colors">
-                  <Heart className="w-4 h-4 fill-gold text-gold" />
-                  <span>{item.likes}</span>
-                </div>
-                <div className="flex items-center gap-1.5 hover:text-gold transition-colors">
-                  <MessageCircle className="w-4 h-4 fill-cream/10" />
-                  <span>{item.comments}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+      {/* Premium coming soon placeholder card */}
+      <div className="glass-card p-8 rounded-xl border border-gold/15 flex flex-col items-center justify-center text-center gap-4 hover:border-gold/30 transition-all duration-300 shadow-xl">
+        <div className="p-3 bg-gold/5 rounded-full border border-gold/10">
+          <Instagram className="w-8 h-8 text-gold" />
+        </div>
+        <div>
+          <h4 className="text-sm font-serif text-cream mb-1.5 tracking-wider">Our Visual Journey is Beginning</h4>
+          <p className="text-xs text-cream-muted font-sans font-light leading-relaxed max-w-md mx-auto">
+            We are currently curating a high-fashion lookbook of our signature transformations, luxury hair designs, and premium nail artistry. Follow our account to be notified when we launch.
+          </p>
+        </div>
+        <a 
+          href="https://instagram.com" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="mt-2 text-[10px] text-gold uppercase tracking-widest font-sans border-b border-gold/30 pb-0.5 hover:text-gold-light hover:border-gold-light transition-colors"
+        >
+          Follow @ForeverBeautySanctuary
+        </a>
       </div>
     </div>
   );
