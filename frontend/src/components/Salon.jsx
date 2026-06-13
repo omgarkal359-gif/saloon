@@ -116,7 +116,7 @@ const Salon = ({ salonSettings = {} }) => {
 
             <div className="mt-6 p-4 rounded-xl bg-gold/5 border border-gold/10 text-center">
               <p className="text-[11px] text-cream-muted font-sans font-light uppercase tracking-wider leading-relaxed">
-                Prior reservation recommended via direct WhatsApp.
+                Prior reservation recommended. Contact us to book.
               </p>
             </div>
           </div>

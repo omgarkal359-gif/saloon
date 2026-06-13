@@ -1,9 +1,7 @@
 import React from 'react';
-import MagneticButton from './MagneticButton';
 import heroBg from '../assets/salon_hero_bg.png';
 
-const Hero = ({ onBookWhatsApp, salonSettings = {} }) => {
-  const phone = salonSettings.phoneNumber || '+91 9326899376';
+const Hero = () => {
 
   return (
     <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
@@ -37,15 +35,7 @@ const Hero = ({ onBookWhatsApp, salonSettings = {} }) => {
           Indulge in royal treatments designed to restore hair vitality, reveal a radiant skin glow, and sculpt flawless bridal artistry to elevate your natural elegance.
         </p>
 
-        {/* Floating Magnetic CTA Button */}
-        <div className="reveal active mt-6 md:mt-8">
-          <MagneticButton onClick={onBookWhatsApp} className="py-4 px-10 text-sm font-semibold tracking-widest shadow-gold/15">
-            Book via WhatsApp
-          </MagneticButton>
-          <span className="block mt-2 text-xs text-cream-muted tracking-widest font-sans font-light uppercase">
-            WhatsApp or Call: <span className="text-gold font-medium">{phone}</span>
-          </span>
-        </div>
+
       </div>
 
       {/* Scroll Down Indicator */}

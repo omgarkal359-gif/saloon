@@ -216,18 +216,6 @@ function App() {
     };
   }, [loading, services, view]);
 
-  // Build WhatsApp booking URL from dynamic phone number
-  const getWhatsAppUrl = () => {
-    const rawPhone = salonSettings?.phoneNumber || '+91 9326899376';
-    const phone = rawPhone.replace(/\D/g, ''); // strip non-digits
-    const text = encodeURIComponent("Hello Forever Beauty Salon! I would like to inquire about booking a treatment.");
-    return `https://wa.me/${phone}?text=${text}`;
-  };
-
-  const handleBookWhatsApp = () => {
-    window.open(getWhatsAppUrl(), '_blank');
-  };
-
   const handleContactUs = () => {
     const el = document.getElementById('about');
     if (el) {
@@ -242,11 +230,11 @@ function App() {
   return (
     <div className="relative min-h-screen bg-charcoal text-cream font-sans antialiased animate-fade-in">
       {/* Navigation Header */}
-      <Navbar onContactUs={handleContactUs} salonSettings={salonSettings} />
+      <Navbar onContactUs={handleContactUs} />
 
       {/* Main Luxury Content Sections */}
       <main>
-        <Hero onBookWhatsApp={handleBookWhatsApp} salonSettings={salonSettings} />
+        <Hero />
 
         <ServiceMenu services={services} />
 
