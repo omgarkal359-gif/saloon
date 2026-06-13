@@ -132,14 +132,28 @@ const defaultServices = [
 ];
 
 // Initialize JSON files if missing
-if (!fs.existsSync(SERVICES_FILE)) {
-  fs.writeFileSync(SERVICES_FILE, JSON.stringify(defaultServices, null, 2));
+try {
+  if (!fs.existsSync(SERVICES_FILE)) {
+    fs.writeFileSync(SERVICES_FILE, JSON.stringify(defaultServices, null, 2));
+  }
+} catch (err) {
+  console.warn('Could not initialize mock services file:', err.message);
 }
-if (!fs.existsSync(APPOINTMENTS_FILE)) {
-  fs.writeFileSync(APPOINTMENTS_FILE, JSON.stringify([]));
+
+try {
+  if (!fs.existsSync(APPOINTMENTS_FILE)) {
+    fs.writeFileSync(APPOINTMENTS_FILE, JSON.stringify([]));
+  }
+} catch (err) {
+  console.warn('Could not initialize mock appointments file:', err.message);
 }
-if (!fs.existsSync(INQUIRIES_FILE)) {
-  fs.writeFileSync(INQUIRIES_FILE, JSON.stringify([]));
+
+try {
+  if (!fs.existsSync(INQUIRIES_FILE)) {
+    fs.writeFileSync(INQUIRIES_FILE, JSON.stringify([]));
+  }
+} catch (err) {
+  console.warn('Could not initialize mock inquiries file:', err.message);
 }
 
 // ----------------------------------------------------
