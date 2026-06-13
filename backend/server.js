@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import connectDB from './config/db.js';
 import appointmentRoutes from './routes/appointmentRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import inquiryRoutes from './routes/inquiryRoutes.js';
@@ -11,8 +10,12 @@ import transformationRoutes from './routes/transformationRoutes.js';
 // Load env variables
 dotenv.config();
 
-// Connect to Database
-connectDB();
+// Verify Supabase env vars are present
+if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) {
+  console.error('⚠️  SUPABASE_URL or SUPABASE_SERVICE_KEY is missing from environment.');
+} else {
+  console.log('✅ Supabase connection configured:', process.env.SUPABASE_URL);
+}
 
 const app = express();
 
@@ -34,7 +37,11 @@ app.use('/api/transformations', transformationRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'Forever Beauty Salon API is running.' });
+  res.status(200).json({
+    status: 'OK',
+    message: 'Forever Beauty Salon API is running.',
+    database: 'Supabase (PostgreSQL)'
+  });
 });
 
 // Error handling middleware
@@ -50,7 +57,7 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT} — powered by Supabase`);
 });
 
 export default app;

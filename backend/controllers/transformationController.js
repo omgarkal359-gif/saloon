@@ -1,35 +1,50 @@
-import Transformation from '../models/Transformation.js';
-import { getMockTransformations, saveMockTransformation, deleteMockTransformation } from '../utils/mockData.js';
+import supabase from '../config/supabase.js';
 
 // GET all transformations
 export const getTransformations = async (req, res) => {
   try {
-    const transformations = await Transformation.find().sort({ createdAt: -1 });
-    res.json({ success: true, transformations });
+    const { data: transformations, error } = await supabase
+      .from('transformations')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    // Map snake_case → camelCase for frontend
+    const mapped = transformations.map(mapTransformation);
+    return res.json({ success: true, transformations: mapped });
   } catch (err) {
-    console.warn('MongoDB unavailable, using mock transformations');
-    const transformations = getMockTransformations();
-    res.json({ success: true, transformations });
+    console.error('Error fetching transformations:', err);
+    return res.status(500).json({ success: false, message: 'Failed to fetch transformations.', error: err.message });
   }
 };
 
 // POST create a new transformation
 export const createTransformation = async (req, res) => {
   const { title, description, beforeImage, afterImage } = req.body;
+
   if (!title || !beforeImage || !afterImage) {
     return res.status(400).json({ success: false, message: 'Title, Before Image, and After Image are required.' });
   }
+
   try {
-    const transformation = await Transformation.create({ title, description, beforeImage, afterImage });
-    res.status(201).json({ success: true, transformation });
+    const { data: transformation, error } = await supabase
+      .from('transformations')
+      .insert([{
+        title,
+        description: description || '',
+        before_image: beforeImage,
+        after_image: afterImage
+      }])
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return res.status(201).json({ success: true, transformation: mapTransformation(transformation) });
   } catch (err) {
-    console.warn('MongoDB unavailable, using mock transformations for create');
-    const transformation = saveMockTransformation({ title, description, beforeImage, afterImage });
-    if (transformation) {
-      res.status(201).json({ success: true, transformation });
-    } else {
-      res.status(500).json({ success: false, message: 'Failed to save transformation' });
-    }
+    console.error('Error creating transformation:', err);
+    return res.status(500).json({ success: false, message: 'Failed to save transformation.', error: err.message });
   }
 };
 
@@ -37,16 +52,30 @@ export const createTransformation = async (req, res) => {
 export const deleteTransformation = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Transformation.findByIdAndDelete(id);
-    if (!result) return res.status(404).json({ success: false, message: 'Transformation not found' });
-    res.json({ success: true, message: 'Transformation deleted' });
+    const { error } = await supabase
+      .from('transformations')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
+
+    return res.json({ success: true, message: 'Transformation deleted.' });
   } catch (err) {
-    console.warn('MongoDB unavailable, using mock transformations for delete');
-    const ok = deleteMockTransformation(id);
-    if (ok) {
-      res.json({ success: true, message: 'Transformation deleted' });
-    } else {
-      res.status(500).json({ success: false, message: 'Failed to delete transformation' });
-    }
+    console.error('Error deleting transformation:', err);
+    return res.status(500).json({ success: false, message: 'Failed to delete transformation.', error: err.message });
   }
 };
+
+// Map snake_case DB columns → camelCase for the frontend
+function mapTransformation(row) {
+  if (!row) return null;
+  return {
+    _id: row.id,
+    id: row.id,
+    title: row.title,
+    description: row.description,
+    beforeImage: row.before_image,
+    afterImage: row.after_image,
+    createdAt: row.created_at
+  };
+}
