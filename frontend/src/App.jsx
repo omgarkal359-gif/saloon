@@ -1,0 +1,235 @@
+import React, { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import ServiceMenu from './components/ServiceMenu';
+import BeforeAfterSlider from './components/BeforeAfterSlider';
+import Stylists from './components/Stylists';
+import Footer from './components/Footer';
+import BookingModal from './components/BookingModal';
+
+// Static fallback services catalog in case backend is loading or unreachable
+const FALLBACK_SERVICES = [
+  {
+    _id: '666ab1234567890123456781',
+    name: 'Luxury Haircut & Styling',
+    category: 'Hair & Styling',
+    price: 45,
+    duration: 45,
+    description: 'A customized cut, wash, and blow-dry tailored to your features and lifestyle, using premium nourishing shampoos.'
+  },
+  {
+    _id: '666ab1234567890123456782',
+    name: 'Balayage & Hair Colouring',
+    category: 'Hair & Styling',
+    price: 120,
+    duration: 120,
+    description: 'Expert dimensional hand-painted color and highlights to create a natural, sun-kissed look.'
+  },
+  {
+    _id: '666ab1234567890123456783',
+    name: 'Premium Keratin Hair Treatment',
+    category: 'Hair & Styling',
+    price: 85,
+    duration: 90,
+    description: 'Deep conditioning treatment to restore strength, moisture, and mirror-like shine to damaged hair.'
+  },
+  {
+    _id: '666ab1234567890123456784',
+    name: 'Aromatherapy Head Massage',
+    category: 'Hair & Styling',
+    price: 40,
+    duration: 30,
+    description: 'A deeply relaxing head massage using premium essential oils to release stress and tension.'
+  },
+  {
+    _id: '666ab1234567890123456785',
+    name: 'Organic Glow Facial',
+    category: 'Skin & Body Care',
+    price: 75,
+    duration: 60,
+    description: 'Revitalizing skin therapy utilizing organic serums, custom masks, and massage to restore a youthful glow.'
+  },
+  {
+    _id: '666ab1234567890123456786',
+    name: 'Smooth Silk Waxing',
+    category: 'Skin & Body Care',
+    price: 50,
+    duration: 45,
+    description: 'Gentle, full-leg and arm organic hot wax treatment for ultra-smooth skin with minimal discomfort.'
+  },
+  {
+    _id: '666ab1234567890123456787',
+    name: 'Swedish Full Body Massage',
+    category: 'Skin & Body Care',
+    price: 110,
+    duration: 75,
+    description: 'Secluded full-body relaxation massage designed to improve circulation and ease muscle tightness.'
+  },
+  {
+    _id: '666ab1234567890123456788',
+    name: 'Precision Threading (Brows & Upper Lip)',
+    category: 'Skin & Body Care',
+    price: 15,
+    duration: 15,
+    description: 'Accurate and clean facial hair shaping using pure cotton thread for pristine definition.'
+  },
+  {
+    _id: '666ab1234567890123456789',
+    name: 'Spa Manicure',
+    category: 'Nails & Hands',
+    price: 35,
+    duration: 45,
+    description: 'Nail shaping, cuticle care, luxury hand scrub, and moisturizing massage finished with premium gel polish.'
+  },
+  {
+    _id: '666ab1234567890123456790',
+    name: 'Revitalizing Pedicure',
+    category: 'Nails & Hands',
+    price: 45,
+    duration: 50,
+    description: 'Warm foot soak, exfoliation, nail grooming, and relaxing massage to refresh tired feet.'
+  },
+  {
+    _id: '666ab1234567890123456791',
+    name: 'All-inclusive Nail Treatment & Extensions',
+    category: 'Nails & Hands',
+    price: 60,
+    duration: 60,
+    description: 'Gel extension overlay or intense strengthening therapy to give your nails a stunning, long-lasting look.'
+  },
+  {
+    _id: '666ab1234567890123456792',
+    name: 'Royal Bridal Makeup',
+    category: 'Bridal & Artistry',
+    price: 250,
+    duration: 150,
+    description: 'Complete high-definition bridal look with premium lashes, contouring, and setting for your special day.'
+  },
+  {
+    _id: '666ab1234567890123456793',
+    name: 'Premium Makeup Package (Party/Festive)',
+    category: 'Bridal & Artistry',
+    price: 180,
+    duration: 90,
+    description: 'Custom glam for any event, focusing on flawless skin, elegant eyes, and long-wearing luxury finishes.'
+  },
+  {
+    _id: '666ab1234567890123456794',
+    name: 'Exquisite Royal Mehndi Design',
+    category: 'Bridal & Artistry',
+    price: 70,
+    duration: 90,
+    description: 'Bespoke hand-applied henna art featuring intricate traditional and contemporary bridal patterns.'
+  }
+];
+
+function App() {
+  const [services, setServices] = useState(FALLBACK_SERVICES);
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const API_BASE_URL = 'http://localhost:5000/api';
+
+  // Fetch services from Backend
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/services`);
+        const data = await response.json();
+        if (data.success && data.services && data.services.length > 0) {
+          setServices(data.services);
+        }
+      } catch (error) {
+        console.warn('Backend API service catalog fetch failed. Falling back to static data.', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  // Setup Scroll-Driven Reveal (IntersectionObserver)
+  useEffect(() => {
+    const reveals = document.querySelectorAll('.reveal');
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      },
+      {
+        threshold: 0.1, // trigger reveal when 10% of element is in view
+        rootMargin: '0px 0px -50px 0px' // offset slightly from bottom viewport
+      }
+    );
+
+    reveals.forEach((reveal) => observer.observe(reveal));
+
+    return () => {
+      reveals.forEach((reveal) => observer.unobserve(reveal));
+    };
+  }, [loading, services]); // re-run when content loads or changes
+
+  // Service toggle selection
+  const handleToggleService = (service) => {
+    setSelectedServices(prev => {
+      const exists = prev.some(s => s._id === service._id);
+      if (exists) {
+        return prev.filter(s => s._id !== service._id);
+      } else {
+        return [...prev, service];
+      }
+    });
+  };
+
+  const handleClearSelection = () => {
+    setSelectedServices([]);
+  };
+
+  const handleOpenBooking = () => {
+    setIsBookingOpen(true);
+  };
+
+  return (
+    <div className="relative min-h-screen bg-charcoal text-cream font-sans antialiased">
+      {/* Navigation Header */}
+      <Navbar onOpenBooking={handleOpenBooking} />
+
+      {/* Main Luxury Content Sections */}
+      <main>
+        <Hero onOpenBooking={handleOpenBooking} />
+        
+        <ServiceMenu 
+          services={services}
+          selectedServices={selectedServices}
+          onToggleService={handleToggleService}
+          onBookNow={handleOpenBooking}
+        />
+        
+        <BeforeAfterSlider />
+        
+        <Stylists />
+      </main>
+
+      {/* Footer Details */}
+      <Footer />
+
+      {/* 3-Step Booking Wizard Modal */}
+      <BookingModal 
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+        services={services}
+        selectedServices={selectedServices}
+        onToggleService={handleToggleService}
+        onClearSelection={handleClearSelection}
+      />
+    </div>
+  );
+}
+
+export default App;

@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-charcoal text-cream font-sans antialiased overflow-x-hidden;
+    background-color: #1A1A1A;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Custom Scroll reveal class */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Service Card Hover Custom transition */
+.service-card {
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.service-card:hover {
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
+}
+
+.service-card-image-container img {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.service-card:hover .service-card-image-container img {
+  transform: scale(1.05);
+}
+
+/* Sleek Gold Gradient and magnetic styling */
+.btn-magnetic {
+  background: linear-gradient(135deg, #B89025 0%, #D4AF37 50%, #E5C05E 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  transition: background-position 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-magnetic:hover {
+  background-position: 100% 0%;
+}
+
+/* Before After slider styles */
+.slider-handle {
+  cursor: ew-resize;
+}
+
+/* Hide scrollbar for clean horizontal list scrolling if needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom transitions */
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(26, 26, 26, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(214, 175, 55, 0.1);
+}
+
+.glass-card {
+  background: rgba(34, 34, 34, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(214, 175, 55, 0.08);
+}
