@@ -231,7 +231,7 @@ const BookingModal = ({ isOpen, onClose, services, selectedServices, onToggleSer
                         <span className="text-xs text-cream-muted font-sans font-light">{service.category} &bull; {service.duration} mins</span>
                       </div>
                       <div className="flex items-center gap-4">
-                        <span className="font-serif">${service.price}</span>
+                        <span className="font-serif">₹{service.price}</span>
                         <input
                           type="checkbox"
                           checked={isSelected}
@@ -440,13 +440,13 @@ const BookingModal = ({ isOpen, onClose, services, selectedServices, onToggleSer
                   <span className="text-xs text-gold uppercase tracking-wider font-sans block mb-1">Services</span>
                   <ul className="text-xs text-cream-dark font-sans font-light list-disc pl-4 flex flex-col gap-1">
                     {successData.services.map((s, idx) => (
-                      <li key={idx}>{s.name} (${s.price})</li>
+                      <li key={idx}>{s.name} (₹{s.price})</li>
                     ))}
                   </ul>
                 </div>
                 <div className="flex justify-between border-t border-gold/10 pt-2.5 text-base">
                   <span className="text-gold font-medium font-sans">Total Confirmed</span>
-                  <span className="text-gold font-serif font-bold">${successData.totalPrice}</span>
+                  <span className="text-gold font-serif font-bold">₹{successData.totalPrice}</span>
                 </div>
               </div>
 
@@ -464,7 +464,7 @@ const BookingModal = ({ isOpen, onClose, services, selectedServices, onToggleSer
             <div className="text-left">
               <span className="text-[10px] text-gold uppercase tracking-widest block font-sans">Total Selected</span>
               <span className="text-cream text-sm font-serif font-normal">
-                ${totalPrice} &bull; {totalDuration} mins
+                ₹{totalPrice} &bull; {totalDuration} mins
               </span>
             </div>
 

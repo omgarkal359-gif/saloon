@@ -12,7 +12,7 @@ export const mockServices = [
     _id: '666ab1234567890123456781',
     name: 'Luxury Haircut & Styling',
     category: 'Hair & Styling',
-    price: 45,
+    price: 1200,
     duration: 45,
     description: 'A customized cut, wash, and blow-dry tailored to your features and lifestyle, using premium nourishing shampoos.'
   },
@@ -20,7 +20,7 @@ export const mockServices = [
     _id: '666ab1234567890123456782',
     name: 'Balayage & Hair Colouring',
     category: 'Hair & Styling',
-    price: 120,
+    price: 4500,
     duration: 120,
     description: 'Expert dimensional hand-painted color and highlights to create a natural, sun-kissed look.'
   },
@@ -28,7 +28,7 @@ export const mockServices = [
     _id: '666ab1234567890123456783',
     name: 'Premium Keratin Hair Treatment',
     category: 'Hair & Styling',
-    price: 85,
+    price: 3500,
     duration: 90,
     description: 'Deep conditioning treatment to restore strength, moisture, and mirror-like shine to damaged hair.'
   },
@@ -36,7 +36,7 @@ export const mockServices = [
     _id: '666ab1234567890123456784',
     name: 'Aromatherapy Head Massage',
     category: 'Hair & Styling',
-    price: 40,
+    price: 800,
     duration: 30,
     description: 'A deeply relaxing head massage using premium essential oils to release stress and tension.'
   },
@@ -46,7 +46,7 @@ export const mockServices = [
     _id: '666ab1234567890123456785',
     name: 'Organic Glow Facial',
     category: 'Skin & Body Care',
-    price: 75,
+    price: 2200,
     duration: 60,
     description: 'Revitalizing skin therapy utilizing organic serums, custom masks, and massage to restore a youthful glow.'
   },
@@ -54,7 +54,7 @@ export const mockServices = [
     _id: '666ab1234567890123456786',
     name: 'Smooth Silk Waxing',
     category: 'Skin & Body Care',
-    price: 50,
+    price: 1200,
     duration: 45,
     description: 'Gentle, full-leg and arm organic hot wax treatment for ultra-smooth skin with minimal discomfort.'
   },
@@ -62,7 +62,7 @@ export const mockServices = [
     _id: '666ab1234567890123456787',
     name: 'Swedish Full Body Massage',
     category: 'Skin & Body Care',
-    price: 110,
+    price: 3500,
     duration: 75,
     description: 'Secluded full-body relaxation massage designed to improve circulation and ease muscle tightness.'
   },
@@ -70,8 +70,8 @@ export const mockServices = [
     _id: '666ab1234567890123456788',
     name: 'Precision Threading (Brows & Upper Lip)',
     category: 'Skin & Body Care',
-    price: 15,
-    duration: 15,
+    price: 250,
+    duration: 150,
     description: 'Accurate and clean facial hair shaping using pure cotton thread for pristine definition.'
   },
 
@@ -80,7 +80,7 @@ export const mockServices = [
     _id: '666ab1234567890123456789',
     name: 'Spa Manicure',
     category: 'Nails & Hands',
-    price: 35,
+    price: 1000,
     duration: 45,
     description: 'Nail shaping, cuticle care, luxury hand scrub, and moisturizing massage finished with premium gel polish.'
   },
@@ -88,7 +88,7 @@ export const mockServices = [
     _id: '666ab1234567890123456790',
     name: 'Revitalizing Pedicure',
     category: 'Nails & Hands',
-    price: 45,
+    price: 1200,
     duration: 50,
     description: 'Warm foot soak, exfoliation, nail grooming, and relaxing massage to refresh tired feet.'
   },
@@ -96,7 +96,7 @@ export const mockServices = [
     _id: '666ab1234567890123456791',
     name: 'All-inclusive Nail Treatment & Extensions',
     category: 'Nails & Hands',
-    price: 60,
+    price: 2000,
     duration: 60,
     description: 'Gel extension overlay or intense strengthening therapy to give your nails a stunning, long-lasting look.'
   },
@@ -106,7 +106,7 @@ export const mockServices = [
     _id: '666ab1234567890123456792',
     name: 'Royal Bridal Makeup',
     category: 'Bridal & Artistry',
-    price: 250,
+    price: 15000,
     duration: 150,
     description: 'Complete high-definition bridal look with premium lashes, contouring, and setting for your special day.'
   },
@@ -114,7 +114,7 @@ export const mockServices = [
     _id: '666ab1234567890123456793',
     name: 'Premium Makeup Package (Party/Festive)',
     category: 'Bridal & Artistry',
-    price: 180,
+    price: 7500,
     duration: 90,
     description: 'Custom glam for any event, focusing on flawless skin, elegant eyes, and long-wearing luxury finishes.'
   },
@@ -122,7 +122,7 @@ export const mockServices = [
     _id: '666ab1234567890123456794',
     name: 'Exquisite Royal Mehndi Design',
     category: 'Bridal & Artistry',
-    price: 70,
+    price: 3000,
     duration: 90,
     description: 'Bespoke hand-applied henna art featuring intricate traditional and contemporary bridal patterns.'
   }

@@ -7,7 +7,7 @@ export const sendConfirmationEmail = async (appointment) => {
   const verifiedEmail = process.env.VERIFIED_SENDER_EMAIL;
 
   const servicesListHtml = services
-    .map(s => `<li>${s.name} - $${s.price} (${s.duration} mins)</li>`)
+    .map(s => `<li>${s.name} - ₹${s.price} (${s.duration} mins)</li>`)
     .join('');
 
   const emailHtml = `
@@ -28,7 +28,7 @@ export const sendConfirmationEmail = async (appointment) => {
            <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #ECEAE4; line-height: 1.6;">
              ${servicesListHtml}
            </ul>
-           <p style="margin: 15px 0 5px 0; font-size: 15px; color: #FDFBF7;"><strong>Total Cost:</strong> $${totalPrice}</p>
+           <p style="margin: 15px 0 5px 0; font-size: 15px; color: #FDFBF7;"><strong>Total Cost:</strong> ₹${totalPrice}</p>
            <p style="margin: 5px 0; font-size: 15px; color: #FDFBF7;"><strong>Total Duration:</strong> ${totalDuration} mins</p>
          </div>
          
@@ -63,7 +63,7 @@ export const sendConfirmationEmail = async (appointment) => {
     to: clientInfo.email,
     from: verifiedEmail,
     subject: 'Appointment Confirmed - Forever Beauty Salon',
-    text: `Hello ${clientInfo.name}! Your appointment at Forever Beauty Salon on ${date} at ${time} is confirmed. Selected Services: ${services.map(s => s.name).join(', ')}. Total: $${totalPrice}. Please note that our salon is strictly reserved for ladies.`,
+    text: `Hello ${clientInfo.name}! Your appointment at Forever Beauty Salon on ${date} at ${time} is confirmed. Selected Services: ${services.map(s => s.name).join(', ')}. Total: ₹${totalPrice}. Please note that our salon is strictly reserved for ladies.`,
     html: emailHtml,
   };
 

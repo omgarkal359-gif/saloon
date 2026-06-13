@@ -88,7 +88,7 @@ const ServiceMenu = ({ services, selectedServices, onToggleService, onBookNow })
                     Duration: <span className="text-gold font-medium">{service.duration} mins</span>
                   </div>
                   <div className="text-gold font-serif text-xl font-normal">
-                    ${service.price}
+                    ₹{service.price}
                   </div>
                 </div>
               </div>
@@ -117,7 +117,7 @@ const ServiceMenu = ({ services, selectedServices, onToggleService, onBookNow })
               <div>
                 <span className="text-gold uppercase tracking-widest text-xs block mb-1">Total Price</span>
                 <span className="text-gold font-serif text-2xl font-semibold">
-                  ${totalPrice}
+                  ₹{totalPrice}
                 </span>
               </div>
             </div>
