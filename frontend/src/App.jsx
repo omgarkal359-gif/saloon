@@ -128,7 +128,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState('home'); // 'home' or 'admin'
 
-  const API_BASE_URL = 'http://localhost:5000/api';
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
   // Fetch services from Backend
   const fetchServices = async () => {
