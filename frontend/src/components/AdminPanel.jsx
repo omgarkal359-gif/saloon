@@ -180,7 +180,7 @@ const AdminPanel = ({ onBack }) => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-charcoal flex flex-col items-center justify-center p-6 select-none">
+      <div className="min-h-screen bg-charcoal flex flex-col items-center justify-center p-6">
         <button 
           onClick={onBack} 
           className="absolute top-6 left-6 flex items-center gap-2 text-cream-muted hover:text-gold transition-colors text-sm uppercase tracking-wider font-sans font-medium"
