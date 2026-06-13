@@ -32,7 +32,7 @@ const Hero = ({ onBookWhatsApp }) => {
         </h1>
         
         <p className="reveal active font-sans text-cream-dark text-lg md:text-xl lg:text-2xl font-light tracking-widest max-w-2xl leading-relaxed mt-2">
-          Your Exclusive Sanctuary of Timeless Beauty — Designed to nurture privacy, absolute comfort, and complete relaxation.
+          Indulge in royal treatments designed to restore hair vitality, reveal a radiant skin glow, and sculpt flawless bridal artistry to elevate your natural elegance.
         </p>
 
         {/* Floating Magnetic CTA Button */}
